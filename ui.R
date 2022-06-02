@@ -38,7 +38,87 @@ age_range_2 <- function(age) {
 student_drinking_2 <- student_drinking_df %>% 
   mutate(age_ranges = age_range_2(age))
 
-# Visualization 3 Data Table
+#Visualization 3 data table 1
+famrel_df <- student_drinking_df %>%
+  select(Mjob, famrel, freetime, G3, Talc) %>% 
+  group_by(Mjob) %>%
+  summarise(avg_family_relationship = mean(famrel))
+
+freetime_df <- student_drinking_df %>%
+  select(Mjob, famrel, freetime, G3, Talc) %>% 
+  group_by(Mjob) %>%
+  summarise(avg_freetime = mean(freetime))
+
+G3_df <- student_drinking_df %>%
+  select(Mjob, famrel, freetime, G3, Talc) %>% 
+  group_by(Mjob) %>%  
+  summarise(avg_final_grades = mean(G3))
+
+Talc_df <- student_drinking_df %>%
+  select(Mjob, famrel, freetime, G3, Talc) %>% 
+  group_by(Mjob) %>% 
+  summarise(avg_drinking = mean(Talc)) 
+
+mom_job_df <- left_join(famrel_df, freetime_df, by = 'Mjob')
+mom_job_df <- left_join(mom_job_df, G3_df, by = 'Mjob')
+mom_job_df <- left_join(mom_job_df, Talc_df, by = 'Mjob')
+
+mom_job_df <- mom_job_df %>% 
+  pivot_longer(!c(Mjob),
+               names_to = "Student_Ratings",
+               values_to = "Values")
+
+mom_job_df$Mjob <- gsub("at_home", "At Home", as.character(mom_job_df$Mjob))
+mom_job_df$Mjob <- gsub("health", "Health", as.character(mom_job_df$Mjob))
+mom_job_df$Mjob <- gsub("other", "Other", as.character(mom_job_df$Mjob))
+mom_job_df$Mjob <- gsub("services", "Services", as.character(mom_job_df$Mjob))
+mom_job_df$Mjob <- gsub("teacher", "Teacher", as.character(mom_job_df$Mjob))
+mom_job_df$Student_Ratings <- gsub("avg_family_relationship", "Avg Family Relationship", as.character(mom_job_df$Student_Ratings))
+mom_job_df$Student_Ratings <- gsub("avg_freetime", "Avg Freetime", as.character(mom_job_df$Student_Ratings))
+mom_job_df$Student_Ratings <- gsub("avg_final_grades", "Avg Final Grades", as.character(mom_job_df$Student_Ratings))
+mom_job_df$Student_Ratings <- gsub("avg_drinking", "Avg Alcohol Consumption", as.character(mom_job_df$Student_Ratings))
+
+#Visualization 3 data table 2
+famrel_df <- student_drinking_df %>%
+  select(Fjob, famrel, freetime, G3, Talc) %>% 
+  group_by(Fjob) %>%
+  summarise(avg_family_relationship = mean(famrel))
+
+freetime_df <- student_drinking_df %>%
+  select(Fjob, famrel, freetime, G3, Talc) %>% 
+  group_by(Fjob) %>%
+  summarise(avg_freetime = mean(freetime))
+
+G3_df <- student_drinking_df %>%
+  select(Fjob, famrel, freetime, G3, Talc) %>% 
+  group_by(Fjob) %>%  
+  summarise(avg_final_grades = mean(G3))
+
+Talc_df <- student_drinking_df %>%
+  select(Fjob, famrel, freetime, G3, Talc) %>% 
+  group_by(Fjob) %>% 
+  summarise(avg_drinking = mean(Talc)) 
+
+dad_job_df <- left_join(famrel_df, freetime_df, by = 'Fjob')
+dad_job_df <- left_join(dad_job_df, G3_df, by = 'Fjob')
+dad_job_df <- left_join(dad_job_df, Talc_df, by = 'Fjob')
+
+dad_job_df <- dad_job_df %>% 
+  pivot_longer(!c(Fjob),
+               names_to = "Student_Ratings",
+               values_to = "Values")
+
+dad_job_df$Fjob <- gsub("at_home", "At Home", as.character(dad_job_df$Fjob))
+dad_job_df$Fjob <- gsub("health", "Health", as.character(dad_job_df$Fjob))
+dad_job_df$Fjob <- gsub("other", "Other", as.character(dad_job_df$Fjob))
+dad_job_df$Fjob <- gsub("services", "Services", as.character(dad_job_df$Fjob))
+dad_job_df$Fjob <- gsub("teacher", "Teacher", as.character(dad_job_df$Fjob))
+dad_job_df$Student_Ratings <- gsub("avg_family_relationship", "Avg Family Relationship", as.character(dad_job_df$Student_Ratings))
+dad_job_df$Student_Ratings <- gsub("avg_freetime", "Avg Freetime", as.character(dad_job_df$Student_Ratings))
+dad_job_df$Student_Ratings <- gsub("avg_final_grades", "Avg Final Grades", as.character(dad_job_df$Student_Ratings))
+dad_job_df$Student_Ratings <- gsub("avg_drinking", "Avg Alcohol Consumption", as.character(dad_job_df$Student_Ratings))
+
+
 
 intro_tab <- tabPanel(
   'Introduction',
@@ -81,7 +161,34 @@ age_plot <- mainPanel(
   plotlyOutput(outputId = "age_plot")
 )
 
-#Visualization 3 widget
+#Visualization 3 widgets
+mother_job_selection_widget <- sidebarPanel(
+  selectInput(
+    inputId = "m_user_selection",
+    label = "Mother's Occupation",
+    choices = mom_job_df$Mjob,
+    multiple = FALSE,
+    selected = ""
+  )
+)
+
+mother_plot <- mainPanel(
+  plotlyOutput(outputId = "mother_job_plot")
+)
+
+father_job_selection_widget <- sidebarPanel(
+  selectInput(
+    inputId = "f_user_selection",
+    label = "Father's Occupation",
+    choices = dad_job_df$Fjob,
+    multiple = FALSE,
+    selected = ""
+  )
+)
+
+father_plot <- mainPanel(
+  plotlyOutput(outputId = "father_job_plot")
+)
 
 viz_1_tab <- tabPanel(
   "Family's Effect on Drinking",
@@ -103,9 +210,16 @@ viz_2_tab <- tabPanel(
 )
 
 viz_3_tab <- tabPanel(
-  'Visualization 3',
+  'Parent Occupation Effects',
+  mother_job_selection_widget,
+  mother_plot,
   fluidPage(
-    p('Description')
+    p('This is where I talk about Moms'),
+  father_job_selection_widget,
+  father_plot,
+  fluidPage(
+    p('This is where I talk about Dads')
+  )
   )
 )
 
