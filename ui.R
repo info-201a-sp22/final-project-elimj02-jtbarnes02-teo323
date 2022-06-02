@@ -63,7 +63,7 @@ age_filter <- sidebarPanel(
     label = "Select age groups:",
     choices = student_drinking_2$age_ranges,
     multiple = F,
-    selected = "15 - 17"
+    selected = ""
   )
 )
 
