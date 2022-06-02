@@ -1,4 +1,4 @@
-# The Affects of Student Drinking On Grades in Portugal
+# The Effects of Student Drinking On Grades in Portugal
 ## INFO 201 "Foundational Skills for Data Science" — Spring 2022
 
 Authors: Teo Koulias, Eli Jones, Jared Barnes
