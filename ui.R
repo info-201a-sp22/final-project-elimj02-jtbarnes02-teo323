@@ -94,7 +94,7 @@ viz_1_tab <- tabPanel(
 )
 
 viz_2_tab <- tabPanel(
-  'How Drinking Impacts Grades by Age',
+  'Drinking Impact on Grades',
   age_filter,
     age_plot,
    fluidPage(
