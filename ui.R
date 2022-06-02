@@ -38,10 +38,18 @@ viz_3_tab <- tabPanel(
   )
 )
 
+conclusion_tab <- tabPanel(
+  'Conclusion',
+  fluidPage(
+    p('More Description!')
+  )
+)
+
 ui <- navbarPage(
   'Student Drinking - Final Project',
   intro_tab,
   viz_1_tab,
   viz_2_tab,
-  viz_3_tab
+  viz_3_tab,
+  conclusion_tab
 )
