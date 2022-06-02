@@ -5,7 +5,9 @@ library(dplyr)
 library("tidyverse")
 library(bslib)
 
-bs_theme_preview()
+theme <- bs_theme(bg = "#0b3d91",
+                  fg = "black",
+                  primary = "#FCC780")
 
 student_drinking_df <- read.csv("https://query.data.world/s/r47f3cqixzyczsmnwqbrqvu6fcgwh3", stringsAsFactors=FALSE)
 student_drinking_df <- student_drinking_df %>% 
@@ -108,6 +110,7 @@ conclusion_tab <- tabPanel(
 )
 
 ui <- navbarPage(
+  theme = theme,
   'Student Drinking - Final Project',
   intro_tab,
   viz_1_tab,
