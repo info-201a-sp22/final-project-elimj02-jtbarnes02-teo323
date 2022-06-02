@@ -55,12 +55,12 @@ server <- function(input, output) {
         filter(age_ranges %in% input$age_selection)
       
       age_range_plot <- ggplot(data = age_filtered_df) + 
-        geom_point(mapping = aes(x = G3, y = Talc, color = age_ranges)) +
-        ylim(0, 10) +
-        xlim(0, 20) +
-        labs(title = "Grades vs. Alcohol Consumption by Age",
-             x = "Grades",
-             y = "Weekly Alcohol Consumption Scale (1-10)",
+        geom_point(mapping = aes(x = Talc, y = G3, color = age_ranges)) +
+        ylim(0, 20) +
+        xlim(0, 10) +
+        labs(title = "Alcohol Consumption vs. Grades by Age",
+             x = "Weekly Alcohol Consumption Scale (1-10)",
+             y = "Grades",
              color = "Age")
       age_range_plot
   })
