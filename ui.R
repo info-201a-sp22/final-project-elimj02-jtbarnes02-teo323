@@ -77,7 +77,7 @@ viz_1_tab <- tabPanel(
     sidebarPanel(scale_widget),
     main_panel_plot),
   fluidPage(
-    p('Description')
+    p('For visualization 1 we wanted to address one of our questions regarding what leads these Portuguese teenagers to drink. We understand the effect a student’s family life can have on their disposition to drink so this plot was created to determine how their family relationship and parents’ marital status affected their drinking habits. When investigating this plot, you can use the widget to change the family relationship scale from 1-5, 1 being low and 5 being high, to change the graph to demonstrate the direct relationship between parents’ relationship status and the child’s drinking habits throughout the week on a 1-10 scale respectively. After looking at the plot, one can tell that the more a student’s family relationship increases, their drinking scale goes down. Additionally, when a student has a low family relationship and separated parents, they have the highest disposition to drink. Adversely, when the student has a family relationship scale from 2 and 3 then if their parents are together, they are more disposed to drink. Lastly at a family relationship scale of 4 and 5 then both drinking scales are similar and the lowest.')
   )
 )
 
