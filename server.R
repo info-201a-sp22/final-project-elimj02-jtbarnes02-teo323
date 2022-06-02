@@ -19,6 +19,19 @@ parents_status <- fam_relation_df %>%
   group_by(Pstatus, famrel) %>%
   summarize(alc_avg = mean(Talc))
 
+# Visualization 2 Data Table
+
+age_range_2 <- function(age) {
+  age_15_17 <- "15 - 17"
+  age_18_20 <- "18 - 20"
+  age_21_22 <- "21 -22"
+  ifelse(age >= 15 & age <= 17, age_15_17, ifelse(age >= 18 & age <= 20, age_18_20, ifelse(age >= 21, age_21_22, 0)))
+}
+
+student_drinking_2 <- student_drinking_df %>% 
+  mutate(age_ranges = age_range_2(age))
+
+
 server <- function(input, output) {
   
   output$fam_relation_plot <- renderPlotly({
@@ -34,6 +47,22 @@ server <- function(input, output) {
            y = "Weekly Alcohol Consumption Scale (1-10)")
     
     return(fam_relation_plot)
+  })
+  
+  output$age_plot <- renderPlotly({
+      
+      age_filtered_df <- student_drinking_2 %>%
+        filter(age_ranges %in% input$age_selection)
+      
+      age_range_plot <- ggplot(data = age_filtered_df) + 
+        geom_point(mapping = aes(x = G3, y = Talc, color = age_ranges)) +
+        ylim(0, 10) +
+        xlim(0, 20) +
+        labs(title = "Grades vs. Alcohol Consumption by Age",
+             x = "Grades",
+             y = "Weekly Alcohol Consumption Scale (1-10)",
+             color = "Age")
+      age_range_plot
   })
   
 }

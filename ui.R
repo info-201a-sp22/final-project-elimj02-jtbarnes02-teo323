@@ -9,7 +9,7 @@ student_drinking_df <- read.csv("https://query.data.world/s/r47f3cqixzyczsmnwqbr
 student_drinking_df <- student_drinking_df %>% 
   mutate(Talc = Walc + Dalc)
 
-#Visualization 1 data table
+#Visualization 1 Data Table
 fam_relation_df <- student_drinking_df %>%
   select(sex, age, Pstatus, famrel, Talc)
 
@@ -19,6 +19,18 @@ fam_relation_df$Pstatus <- gsub("A", "Apart", as.character(fam_relation_df$Pstat
 parents_status <- fam_relation_df %>%
   group_by(Pstatus, famrel) %>%
   summarize(alc_avg = mean(Talc))
+
+# Visualization 2 Data Table
+
+age_range_2 <- function(age) {
+  age_15_17 <- "15 - 17"
+  age_18_20 <- "18 - 20"
+  age_21_22 <- "21 -22"
+  ifelse(age >= 15 & age <= 17, age_15_17, ifelse(age >= 18 & age <= 20, age_18_20, ifelse(age >= 21, age_21_22, 0)))
+}
+
+student_drinking_2 <- student_drinking_df %>% 
+  mutate(age_ranges = age_range_2(age))
 
 
 intro_tab <- tabPanel(
@@ -45,6 +57,20 @@ main_panel_plot <- mainPanel(
   plotlyOutput(outputId = "fam_relation_plot")
 )
 
+age_filter <- sidebarPanel(
+  selectInput(
+    inputId = "age_selection",
+    label = "Select age groups:",
+    choices = student_drinking_2$age_ranges,
+    multiple = F,
+    selected = "15 - 17"
+  )
+)
+
+age_plot <- mainPanel(
+  plotlyOutput(outputId = "age_plot")
+)
+
 viz_1_tab <- tabPanel(
   'Visualization 1',
   sidebarLayout(
@@ -57,7 +83,9 @@ viz_1_tab <- tabPanel(
 
 viz_2_tab <- tabPanel(
   'Visualization 2',
-  fluidPage(
+  age_filter,
+    age_plot,
+   fluidPage(
     p('Description')
   )
 )
