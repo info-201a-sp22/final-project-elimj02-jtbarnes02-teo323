@@ -25,7 +25,6 @@ parents_status <- fam_relation_df %>%
   summarize(alc_avg = mean(Talc))
 
 # Visualization 2 Data Table
-
 age_range_2 <- function(age) {
   age_15_17 <- "15 - 17"
   age_18_20 <- "18 - 20"
@@ -36,6 +35,7 @@ age_range_2 <- function(age) {
 student_drinking_2 <- student_drinking_df %>% 
   mutate(age_ranges = age_range_2(age))
 
+# Visualization 3 Data Table
 
 intro_tab <- tabPanel(
   'Introduction',
@@ -50,6 +50,7 @@ intro_tab <- tabPanel(
   )
 )
 
+#Visualization 1 widget
 scale_widget <- selectInput(
   inputId = "scale_select",
   label = "Family Relationship Scale",
@@ -62,6 +63,7 @@ main_panel_plot <- mainPanel(
   plotlyOutput(outputId = "fam_relation_plot")
 )
 
+#Visualization 2 widget
 age_filter <- sidebarPanel(
   selectInput(
     inputId = "age_selection",
@@ -75,6 +77,8 @@ age_filter <- sidebarPanel(
 age_plot <- mainPanel(
   plotlyOutput(outputId = "age_plot")
 )
+
+#Visualization 3 widget
 
 viz_1_tab <- tabPanel(
   'Visualization 1',

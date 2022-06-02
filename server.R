@@ -8,7 +8,7 @@ student_drinking_df <- read.csv("https://query.data.world/s/r47f3cqixzyczsmnwqbr
 student_drinking_df <- student_drinking_df %>% 
   mutate(Talc = Walc + Dalc)
 
-# Visualization 2 Data Table
+# Visualization 1 Data Table
 fam_relation_df <- student_drinking_df %>%
   select(sex, age, Pstatus, famrel, Talc)
 
@@ -20,7 +20,6 @@ parents_status <- fam_relation_df %>%
   summarize(alc_avg = mean(Talc))
 
 # Visualization 2 Data Table
-
 age_range_2 <- function(age) {
   age_15_17 <- "15 - 17"
   age_18_20 <- "18 - 20"
@@ -31,9 +30,11 @@ age_range_2 <- function(age) {
 student_drinking_2 <- student_drinking_df %>% 
   mutate(age_ranges = age_range_2(age))
 
+# Visualization 3 Data Table
 
 server <- function(input, output) {
   
+#Visualization 1
   output$fam_relation_plot <- renderPlotly({
     
     fam_relation_df <- parents_status %>%
@@ -49,6 +50,7 @@ server <- function(input, output) {
     return(fam_relation_plot)
   })
   
+#Visualization 2
   output$age_plot <- renderPlotly({
       
       age_filtered_df <- student_drinking_2 %>%
@@ -65,4 +67,5 @@ server <- function(input, output) {
       age_range_plot
   })
   
+#Visualization 3
 }
