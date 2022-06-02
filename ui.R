@@ -5,4 +5,4 @@ library(dplyr)
 library("tidyverse")
 library(bslib)
 
-student_drinking_df <- read.csv("~/Documents/INFO201Code/final-project-elimj02/student_drinking_df.csv")
+student_drinking_df <- read.csv("https://query.data.world/s/r47f3cqixzyczsmnwqbrqvu6fcgwh3", stringsAsFactors=FALSE)
