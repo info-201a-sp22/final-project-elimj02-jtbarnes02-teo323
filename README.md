@@ -3,7 +3,7 @@
 
 Authors: Teo Koulias, Eli Jones, Jared Barnes
 
-Link: (https://elimj02.shinyapps.io/final-project-elimj02/)
+Link: (https://elimj02.shinyapps.io/final-project-elimj02/))
 
 # Introduction
 Underage drinking has always been a major problem in America and most countries. While many other countries have different drinking age limit restrictions, drinking at a young age can lead to unwanted effects, whether it be legal or not. Therefore, our project focuses on the consumption of alcohol of students in secondary school in Portugal and how it affects their academic performance. By analyzing this data and the impact it has on students’ grades, we hope to come to a significant conclusion that can be generalized to the world population.
