@@ -51,6 +51,7 @@ scale_widget <- selectInput(
   label = "Family Relationship Scale",
   choices = parents_status$famrel,
   multiple = F,
+  selected = ""
 )
 
 main_panel_plot <- mainPanel(
