@@ -5,9 +5,12 @@ library(dplyr)
 library("tidyverse")
 library(bslib)
 
-theme <- bs_theme(bg = "#0b3d91",
-                  fg = "black",
-                  primary = "#FCC780")
+theme <- bs_theme(bg = "#528AAE",
+                  fg = "white",
+                  primary = "#1E3F66",
+                  base_font = font_google("Bree Serif"),
+                  code_font = font_google("Bree Serif")
+                  )
 
 student_drinking_df <- read.csv("https://query.data.world/s/r47f3cqixzyczsmnwqbrqvu6fcgwh3", stringsAsFactors=FALSE)
 student_drinking_df <- student_drinking_df %>% 
@@ -81,7 +84,7 @@ age_plot <- mainPanel(
 #Visualization 3 widget
 
 viz_1_tab <- tabPanel(
-  'Visualization 1',
+  "Family's Effect on Drinking",
   sidebarLayout(
     sidebarPanel(scale_widget),
     main_panel_plot),
