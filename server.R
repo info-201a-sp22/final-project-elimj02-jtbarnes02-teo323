@@ -8,7 +8,7 @@ student_drinking_df <- read.csv("https://query.data.world/s/r47f3cqixzyczsmnwqbr
 student_drinking_df <- student_drinking_df %>% 
   mutate(Talc = Walc + Dalc)
 
-#Visualization 1 data table
+# Visualization 2 Data Table
 fam_relation_df <- student_drinking_df %>%
   select(sex, age, Pstatus, famrel, Talc)
 
