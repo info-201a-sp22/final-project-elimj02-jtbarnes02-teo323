@@ -236,7 +236,7 @@ conclusion_tab <- tabPanel(
 
 ui <- navbarPage(
   theme = theme,
-  'Student Drinking - Final Project',
+  'The Affects of Student Drinking On Grades in Portugal',
   intro_tab,
   viz_1_tab,
   viz_2_tab,
