@@ -5,6 +5,8 @@ library(dplyr)
 library("tidyverse")
 library(bslib)
 
+bs_theme_preview()
+
 student_drinking_df <- read.csv("https://query.data.world/s/r47f3cqixzyczsmnwqbrqvu6fcgwh3", stringsAsFactors=FALSE)
 student_drinking_df <- student_drinking_df %>% 
   mutate(Talc = Walc + Dalc)
@@ -86,7 +88,7 @@ viz_2_tab <- tabPanel(
   age_filter,
     age_plot,
    fluidPage(
-    p('Description')
+    p('Visualization 2 aims to examine the correlation between alcohol consumption by Portuguese students and their grades, while comparing different age groups. Grades at the schools this data was collected from was scaled to a 0 through 20 scale. The weekly alcohol consumption levels are on a 1 to 10 scale with 1 being the least frequent and 10 being the most frequent. By navigating through the age group options, users can display groups including ages 15 to 17, 18 to 20, and 21 to 22. Unfortunately, the data for the 21 to 22 age group has extremely minimal data, so no real conclusions can be drawn, but certain assumptions can hopefully be made based on the existing data.')
   )
 )
 
